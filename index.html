@@ -33,6 +33,14 @@
 .perfil-foto .marco::after{content:"";position:absolute;inset:10px;border:1px solid color-mix(in srgb,#F3EEE3 40%,transparent)}
 .perfil-foto img{width:100%;height:100%;object-fit:cover;display:block}
 @media (max-width:760px){.perfil-cuerpo{grid-template-columns:1fr!important}.perfil-foto{max-width:300px}}
+
+/* Pestañas del sitio */
+.cabecera .fila-marca{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px 12px}
+.pestanas-sitio .envoltura{display:flex;gap:8px;overflow-x:auto;padding-block:0 12px;scrollbar-width:none}
+.pestanas-sitio .envoltura::-webkit-scrollbar{display:none}
+.pestanas-sitio a{flex:none;border:1px solid var(--linea);padding:8px 14px;font-weight:600;font-size:.9rem;text-decoration:none;white-space:nowrap;color:var(--tinta);background:var(--tarjeta)}
+.pestanas-sitio a:hover{border-color:var(--verde-2)}
+.pestanas-sitio a[aria-current="page"]{background:var(--verde);color:var(--sobre-verde);border-color:var(--verde)}
 </style>
 <style>
 /* Layout: expediente — columna editorial asimétrica, pestañas tipo carpeta de archivo, citas normativas en mono */
@@ -229,21 +237,25 @@ form{display:grid;gap:16px;background:var(--tarjeta);border:1px solid var(--line
 <body>
 
 <header class="cabecera">
-  <div class="envoltura">
+  <div class="envoltura fila-marca">
     <a class="marca" href="#inicio"><b>Carolina Lozano P.</b><span>Abogada</span></a>
-    <nav class="menu" aria-label="Principal">
-      <a href="#sobre-mi">Sobre mí</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#honorarios">Honorarios</a>
-      <a href="#publicaciones">Publicaciones</a>
-      <a href="#preguntas">Preguntas</a>
-      <a class="boton" href="https://calendar.app.google/oh4tFQLSgb93iTSu9" target="_blank" rel="noopener">Agendar cita</a>
-    </nav>
+    <a class="boton" href="https://calendar.app.google/oh4tFQLSgb93iTSu9" target="_blank" rel="noopener">Agendar cita</a>
   </div>
+  <nav class="pestanas-sitio" aria-label="Secciones">
+    <div class="envoltura">
+      <a href="#inicio" data-ir="inicio">Inicio</a>
+      <a href="#sobre-mi" data-ir="sobre-mi">Sobre mí</a>
+      <a href="#servicios" data-ir="servicios">Servicios</a>
+      <a href="#honorarios" data-ir="honorarios">Honorarios y horario</a>
+      <a href="#publicaciones" data-ir="publicaciones">Publicaciones</a>
+      <a href="#preguntas" data-ir="preguntas">Preguntas</a>
+      <a href="#contacto" data-ir="contacto">Contacto</a>
+    </div>
+  </nav>
 </header>
 
 <main id="inicio">
-  <section class="portada">
+  <section class="portada" data-vista="inicio">
     <div class="envoltura">
       <div>
         <p class="rotulo">Derecho laboral y seguridad social · Colombia</p>
@@ -268,7 +280,7 @@ form{display:grid;gap:16px;background:var(--tarjeta);border:1px solid var(--line
     </div>
   </section>
 
-  <div class="credenciales">
+  <div class="credenciales" data-vista="inicio">
     <div class="envoltura">
       <div><b>Especialista</b><span>en Derecho Laboral</span></div>
       <div><b>Magíster</b><span>en Derecho Laboral y de la Seguridad Social</span></div>
@@ -277,7 +289,7 @@ form{display:grid;gap:16px;background:var(--tarjeta);border:1px solid var(--line
     </div>
   </div>
 
-  <section class="bloque" id="sobre-mi">
+  <section class="bloque" id="sobre-mi" data-vista="sobre-mi">
     <div class="envoltura perfil-cuerpo">
       <div class="perfil-foto">
         <p class="rotulo">Sobre mí</p>
@@ -297,7 +309,7 @@ form{display:grid;gap:16px;background:var(--tarjeta);border:1px solid var(--line
     </div>
   </section>
 
-  <section class="bloque" id="servicios" style="padding-top:0">
+  <section class="bloque" id="servicios" data-vista="servicios">
     <div class="envoltura">
       <div class="encabezado-bloque">
         <p class="rotulo">Servicios</p>
@@ -364,7 +376,7 @@ form{display:grid;gap:16px;background:var(--tarjeta);border:1px solid var(--line
     </div>
   </section>
 
-  <section class="bloque verde" id="proceso">
+  <section class="bloque verde" id="proceso" data-vista="inicio">
     <div class="envoltura">
       <div class="encabezado-bloque">
         <p class="rotulo">Cómo trabajo</p>
@@ -382,7 +394,7 @@ form{display:grid;gap:16px;background:var(--tarjeta);border:1px solid var(--line
     </div>
   </section>
 
-  <section class="bloque" id="honorarios">
+  <section class="bloque" id="honorarios" data-vista="honorarios">
     <div class="envoltura">
       <div class="encabezado-bloque">
         <p class="rotulo">Honorarios</p>
@@ -419,7 +431,7 @@ form{display:grid;gap:16px;background:var(--tarjeta);border:1px solid var(--line
     </div>
   </section>
 
-  <section class="bloque" id="agenda" style="padding-top:0">
+  <section class="bloque" id="agenda" style="padding-top:0" data-vista="honorarios">
     <div class="envoltura">
       <div class="encabezado-bloque">
         <p class="rotulo">Horario y agenda</p>
@@ -442,7 +454,7 @@ form{display:grid;gap:16px;background:var(--tarjeta);border:1px solid var(--line
     </div>
   </section>
 
-  <section class="bloque" id="publicaciones" style="background:var(--papel-2);border-block:1px solid var(--linea)">
+  <section class="bloque" id="publicaciones" data-vista="publicaciones" style="background:var(--papel-2);border-block:1px solid var(--linea)">
     <div class="envoltura">
       <div class="encabezado-bloque">
         <p class="rotulo">Publicaciones</p>
@@ -487,7 +499,7 @@ form{display:grid;gap:16px;background:var(--tarjeta);border:1px solid var(--line
     </div>
   </section>
 
-  <section class="bloque" id="preguntas">
+  <section class="bloque" id="preguntas" data-vista="preguntas">
     <div class="envoltura">
       <div class="encabezado-bloque">
         <p class="rotulo">Preguntas frecuentes</p>
@@ -505,7 +517,7 @@ form{display:grid;gap:16px;background:var(--tarjeta);border:1px solid var(--line
     </div>
   </section>
 
-  <section class="bloque" id="contacto" style="padding-top:0">
+  <section class="bloque" id="contacto" data-vista="contacto">
     <div class="envoltura contacto">
       <div>
         <p class="rotulo">Contacto</p>
@@ -590,6 +602,18 @@ const CONFIG = {
     if (!CONFIG.whatsapp) { e.preventDefault(); aviso.textContent = "El número de WhatsApp aún no está configurado."; }
   });
   document.getElementById("formulario").addEventListener("submit", e => e.preventDefault());
+})();
+
+(function(){
+  const vistas=["inicio","sobre-mi","servicios","honorarios","publicaciones","preguntas","contacto"];
+  const alias={agenda:"honorarios"};
+  function mostrar(){
+    let h=location.hash.slice(1)||"inicio"; h=alias[h]||h; if(!vistas.includes(h)) h="inicio";
+    document.querySelectorAll("[data-vista]").forEach(el=>{el.hidden=el.dataset.vista!==h});
+    document.querySelectorAll("[data-ir]").forEach(a=>{ if(a.dataset.ir===h){a.setAttribute("aria-current","page");a.scrollIntoView({block:"nearest",inline:"nearest"})} else a.removeAttribute("aria-current") });
+    window.scrollTo(0,0);
+  }
+  window.addEventListener("hashchange",mostrar); mostrar();
 })();
 </script>
 </body>
